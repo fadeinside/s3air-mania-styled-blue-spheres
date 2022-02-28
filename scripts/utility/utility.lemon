@@ -60,7 +60,7 @@ function void fn009488()
 		D0.u16 += D1.s16
 	
 	s32 result = s32(u16[A0 + 0x24]) + s32(D0.u16)
-	u16[A0 + 0x24] = u16(result) 
+	u16[A0 + 0x24] = u16(result)
 	
 	if (result & 0x10000)
 	{
@@ -69,7 +69,7 @@ function void fn009488()
 			objA0.animation.sprite = 0x00
 	}
 	
-	// Don't render the Tails' tails when active 
+	// Don't render the Tails' tails when active
 	if !(hideSecondPlayer() && getSecondCharacter() == CHARACTER_TAILS)
 		DrawObject()
 }
@@ -86,7 +86,7 @@ function void fn009b62()
 			bluespheres.lifted_height += (bluespheres.lifted_height >= 0x7d) ? 0x04 : (bluespheres.lifted_height >= 0x3e) ? 0x03 : 0x02
 			return
 		}
-		//Fade out any music  
+		//Fade out any music
 		playMusic(MUSIC_CTRL_FADEOUT)
 	}
 	
@@ -129,7 +129,7 @@ function void fn00972e()
 			{
 				u32[A0 + 0x40] = 0xffe80000
 				u8[0xffffe432] = 0x81
-				Audio.playAudio("yellowsphere") 
+				Audio.playAudio("yellowsphere")
 			}
 		}
 	}

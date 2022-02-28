@@ -5,15 +5,4 @@ include _defines/?
 include general/?
 
 // Utility
-include utility/? 
-
-/*
-+ Добавлена совместимость с "Extra Slot Mighty" by iCloudius (Required latest version 3.0 of Extra Slot Mighty, and install it below)
-+ Добавлена совместимость с "Sonic 3D in 2D Ring Glow Effect" by GFX32 (Can be installed in any order)
-+ Добавлена совместимость с "Blue Sphere Time Attack" (Install it below)
-+ Добавлен режим "Switchable" для "Render mode" - Теперь вы можете переключать персонажей между собой клавишей [Y]
-+ Уменьшен размер колец и приподняты сферы
-+ Хвост Тейлза теперь имеет full framerate
-+ Оптимизированы некоторые функции
-+ Другие незначительные исправления
-*/
+include utility/?

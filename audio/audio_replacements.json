@@ -9,11 +9,11 @@
 	
 	// Blue sphere collected
 	"65": { "File": "sounds/BlueSphere.ogg", "Type": "Sound" },
-	// All blue spheres collected 
+	// All blue spheres collected
 	"66": { "File": "sounds/SSJettison.ogg", "Type": "Sound" },
 	// Yellow sphere
 	"yellowsphere": { "File": "sounds/YellowSphere.ogg", "Type": "Sound" },
-	// Bumper 
+	// Bumper
 	"bumper": { "File": "sounds/Bumper.ogg", "Type": "Sound" },
 	// Emerald collected
 	"2B": { "File": "sounds/Emerald.ogg", "Type": "Sound" },

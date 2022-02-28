@@ -15,7 +15,7 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 			if (!Mods.isModActive("Blue Sphere Time Attack"))
 				ManiaSpheres.renderSwitchLabel(getScreenWidth() / 0x02, 0x14, renderQueue)
 			else
-				ManiaSpheres.renderSwitchLabel(getScreenWidth() / 0x02, getScreenHeight() - 16, renderQueue) 
+				ManiaSpheres.renderSwitchLabel(getScreenWidth() / 0x02, getScreenHeight() - 16, renderQueue)
 		}
 		
 		if (Mods.isModActive("Blue Sphere Time Attack"))
@@ -33,7 +33,7 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 			Renderer.drawCustomSprite("Text_GetBlue", px, py, 0x00, 0x00, renderQueue)
 		if (objA0.animation.sprite == 0x01) // Part 2
 			Renderer.drawCustomSprite((SETTING_BS_BETA_TITLE == 0x01) ? "Text_Balls" : "Text_Spheres", px, py, 0x00, 0x00, renderQueue)
-		return true 
+		return true
 	}
 	
 	// Perfect text
@@ -43,22 +43,22 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 			Renderer.drawCustomSprite("Text_Perf", px, py, 0x00, 0x00, renderQueue)
 		if (objA0.animation.sprite == 0x03) // Part 2
 			Renderer.drawCustomSprite("Text_ect", px, py, 0x00, 0x00, renderQueue)
-		return true 
+		return true
 	}
 	
 	// Switch character stuff
-	if (!hideSecondPlayer() && getNumPlayers() >= 0x02 && SETTING_BS_MAINCHARACTER == 0x02 && (objA0.update_address == 0x00903e || objA0.update_address == 0x00927a)) 
+	if (!hideSecondPlayer() && getNumPlayers() >= 0x02 && SETTING_BS_MAINCHARACTER == 0x02 && (objA0.update_address == 0x00903e || objA0.update_address == 0x00927a))
 	{
 		// Basically, all manipulations are made from the main character
 		if (objA0.update_address == 0x00903e)
 		{
 			if (Input.buttonPressed(BUTTON_Y))
 			{
-				if (bluespheres.character.framecounter == 0x00) 
+				if (bluespheres.character.framecounter == 0x00)
 					bluespheres.character.switch = 0x01
 			}
 			
-			if (bluespheres.character.switch == 0x01) 
+			if (bluespheres.character.switch == 0x01)
 				++bluespheres.character.framecounter
 			
 			if (bluespheres.character.framecounter >= 16)
@@ -76,7 +76,7 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 				}
 			}
 			
-			py += bluespheres.character.framecounter 
+			py += bluespheres.character.framecounter
 			
 			if (bluespheres.character.check == 0x01)
 			{
@@ -96,14 +96,14 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 	// Characters in special stage
 	if (hideSecondPlayer() ? objA0.update_address == 0x00903e : (objA0.update_address == 0x00903e || objA0.update_address == 0x00927a))
 	{
-		bool character.state_idle = (objA0.animation.sprite == 0x01 && bluespheres.started_running == 0x00) 
+		bool character.state_idle = (objA0.animation.sprite == 0x01 && bluespheres.started_running == 0x00)
 		bool character.state_walk = (objA0.animation.sprite <= 0x08 && ((bluespheres.started_running == 0x01) ? (objA0.animation.sprite >= 0x01) : (objA0.animation.sprite >= 0x02)))
 		bool character.state_jump = (objA0.animation.sprite <= 0x0b && objA0.animation.sprite >= 0x09)
 		
-		u32 timer 
+		u32 timer
 		if !(bluespheres.character.switch == 0x01 && objA0.update_address == 0x00903e)
 			timer = (bluespheres.started_running != 0x00) ? u8[0xffffb000 + 0x24] : (u8[0xfffffeb2] >> 0x01)
-		else if !(character.state_jump) 
+		else if !(character.state_jump)
 			timer = 0x00
 		
 		u8 character
@@ -118,58 +118,58 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 		// Ultimate Mighty by Sotaknuck, https://gamebanana.com/mods/54268
 		if (character == CHARACTER_SONIC && (u8[0xffffE654] == 0x01 || Mods.isModActive("Ultimate Mighty")))
 		{
-			if (character.state_idle) 
+			if (character.state_idle)
 				key = stringformat("CharacterMighty_idle_%d", 0x00)
-			else if (character.state_walk) 
+			else if (character.state_walk)
 				key = stringformat("CharacterMighty_walk_%d", timer % 0x0c)
-			else if (character.state_jump) 
+			else if (character.state_jump)
 				key = stringformat("CharacterMighty_jump_%d", timer % 0x0c)
 		}
 		// Ray the Flying Squirrel by campbellsonic, https://gamebanana.com/mods/54261
 		else if (character == CHARACTER_TAILS && Mods.isModActive("Ray the Flying Squirrel"))
 		{
-			if (character.state_jump) 
+			if (character.state_jump)
 				bluespheres.ray_jumped = true
-			else 
+			else
 				bluespheres.ray_jumped = false
 			
-			if (character.state_idle) 
+			if (character.state_idle)
 				key = stringformat("CharacterRay_idle_%d", 0x00)
-			else if (character.state_walk) 
+			else if (character.state_walk)
 				key = stringformat("CharacterRay_walk_%d", timer % 0x0c)
-			else if (character.state_jump) 
+			else if (character.state_jump)
 				key = stringformat("CharacterRay_jump_%d", timer % 0x0c)
 		}
 		else if (character == CHARACTER_SONIC)
 		{
-			if (character.state_idle) 
+			if (character.state_idle)
 				key = stringformat("CharacterSonic_idle_%d", 0x00)
-			else if (character.state_walk) 
+			else if (character.state_walk)
 				key = stringformat("CharacterSonic_walk_%d", timer % 0x0c)
-			else if (character.state_jump) 
+			else if (character.state_jump)
 				key = stringformat("CharacterSonic_jump_%d", timer % 0x0c)
 		}
 		else if (character == CHARACTER_TAILS)
 		{
-			if (character.state_idle) 
+			if (character.state_idle)
 				key = stringformat("CharacterMiles_idle_%d", 0x00)
-			else if (character.state_walk) 
+			else if (character.state_walk)
 				key = stringformat("CharacterMiles_walk_%d", timer % 0x0c)
-			else if (character.state_jump) 
+			else if (character.state_jump)
 				key = stringformat("CharacterMiles_jump_%d", timer % 0x04)
 		}
 		else if (character == CHARACTER_KNUCKLES)
 		{
-			if (character.state_idle) 
+			if (character.state_idle)
 				key = stringformat("CharacterKnuckles_idle_%d", 0x00)
-			else if (character.state_walk) 
+			else if (character.state_walk)
 				key = stringformat("CharacterKnuckles_walk_%d", timer % 0x0c)
-			else if (character.state_jump) 
+			else if (character.state_jump)
 				key = stringformat("CharacterKnuckles_jump_%d", timer % 0x0c)
 		}
 		
 		u8 alpha = 0xff
-		if (bluespheres.character.switch == 0x01 && (objA0.update_address == 0x00903e)) 
+		if (bluespheres.character.switch == 0x01 && (objA0.update_address == 0x00903e))
 			alpha = 0x90 // Makes transparency for the main character when switching
 		
 		Renderer.drawCustomSprite(key, px, py, atex, prioFlag ? SPRITE_FLAG_PRIO : 0x00, renderQueue, 0x00, alpha)
@@ -194,7 +194,7 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 		if (bluespheres.character.switch == 0x01)
 		{
 			if (bluespheres.character.check == 0x01)
-				py += bluespheres.character.framecounter 
+				py += bluespheres.character.framecounter
 			else
 				py -= bluespheres.character.framecounter
 			

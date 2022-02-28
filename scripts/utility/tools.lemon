@@ -1,7 +1,7 @@
 // For correct work with the Blue Sphere Time Attack mod
-function void BlueSpheresTimer.updateTimer() 
+function void BlueSpheresTimer.updateTimer()
 {
-	base.BlueSpheresTimer.updateTimer() 
+	base.BlueSpheresTimer.updateTimer()
 }
 
 // For correct work with the Blue Sphere Time Attack mod
@@ -28,7 +28,7 @@ function void ManiaSpheres.resetCharacters()
 	
 	bluespheres.character.framecounter = 0x00
 	
-	// System.writeDisplayLine("Swithed characters reset") 
+	// System.writeDisplayLine("Swithed characters reset")
 }
 
 function u64 ManiaSpheres.getSphereSprite(u8 sphereType, u8 form, u8 form16)
@@ -36,7 +36,7 @@ function u64 ManiaSpheres.getSphereSprite(u8 sphereType, u8 form, u8 form16)
 	u64 key
 
 	if (sphereType == 0x01) // Red Sphere
-		key = stringformat("RedSphere_size_%d", form) 
+		key = stringformat("RedSphere_size_%d", form)
 	else if (sphereType == 0x02 || sphereType == 0x0a) // Blue Sphere (and during collection)
 		key = stringformat("BlueSphere_size_%d", form)
 	else if (sphereType == 0x03) // Bumper Sphere
@@ -50,7 +50,7 @@ function u64 ManiaSpheres.getSphereSprite(u8 sphereType, u8 form, u8 form16)
 	else if (sphereType == 0x06) // Ring (collected, part 1)
 		key = "RingSparkle_0"
 	else if (sphereType == 0x07) // Ring (collected, part 2)
-		key = "RingSparkle_1" 
+		key = "RingSparkle_1"
 	else if (sphereType == 0x08) // Ring (collected, part 3)
 		key = "RingSparkle_2"
 	else if (sphereType == 0x09) // Ring (collected, part 4)
@@ -70,19 +70,19 @@ function u64 ManiaSpheres.getEmeraldSprite(u8 sphereType, u8 form16)
 	else
 		emeraldColorValue = (u8[0xffffffa4] & 0x07)
 
-	u64 color 
+	u64 color
 	if (emeraldColorValue == 0x00)
 		color = "Green"
 	else if (emeraldColorValue == 0x01)
 	{
 		// by Guthi, https://gamebanana.com/mods/54326
-		if (Mods.isModActive("Yellow Emerald")) 
-			color = "Yellow" 
-		else 
-			color = "Orange" 
-	} 
+		if (Mods.isModActive("Yellow Emerald"))
+			color = "Yellow"
+		else
+			color = "Orange"
+	}
 	else if (emeraldColorValue == 0x02)
-		color = "Pink" 
+		color = "Pink"
 	else if (emeraldColorValue == 0x03)
 		color = "Blue"
 	else if (emeraldColorValue == 0x04)
@@ -93,15 +93,15 @@ function u64 ManiaSpheres.getEmeraldSprite(u8 sphereType, u8 form16)
 		color = "Cyan"
 	else if (emeraldColorValue == 0x07)
 	{
-		if (Mods.isModActive("Yellow Emerald")) 
-			color = "Orange" 
-		else 
-			color = "Yellow" 
+		if (Mods.isModActive("Yellow Emerald"))
+			color = "Orange"
+		else
+			color = "Yellow"
 	}
 
 	u64 view
 	// by Agnoristos, https://gamebanana.com/mods/322550
-	if (Mods.isModActive("3D Side View Chaos Emeralds")) 
+	if (Mods.isModActive("3D Side View Chaos Emeralds"))
 		view = "SuperEmerald"
 	else
 		view = (sphereType == 0x0d) ? "SuperEmerald" : "ChaosEmerald"
@@ -113,7 +113,7 @@ function u64 ManiaSpheres.getEmeraldSprite(u8 sphereType, u8 form16)
 function u32 ManiaSpheres.get2DTransformRingCamera(u8 form16)
 {
 	u32 size
- 
+
 	if (form16 == 0x04)
 		size = 0x1000 // Decimal: 4096
 	else if (form16 == 0x03)
@@ -165,7 +165,7 @@ function u32 ManiaSpheres.get2DTransformSize32(u8 form)
 	else if (form == 0x10)
 		size = 0x8800 // Decimal: 34816
 	else if (form == 0x0f)
-		size = 0x9000 // Decimal: 36864 
+		size = 0x9000 // Decimal: 36864
 	else if (form == 0x0e)
 		size = 0x9800 // Decimal: 38312
 	else if (form == 0x0d)
@@ -177,7 +177,7 @@ function u32 ManiaSpheres.get2DTransformSize32(u8 form)
 	else if (form == 0x0a)
 		size = 0xb800 // Decimal: 47104
 	else if (form == 0x09)
-		size = 0xc000 // Decimal: 49152 
+		size = 0xc000 // Decimal: 49152
 	else if (form == 0x08)
 		size = 0xc800 // Decimal: 51200
 	else if (form == 0x07)
@@ -203,7 +203,7 @@ function u32 ManiaSpheres.get2DTransformSize32(u8 form)
 function u32 ManiaSpheres.get2DTransformSize16(u8 form16)
 {
 	u32 size
- 
+
 	if (form16 == 0x0f)
 		size = 0x1000 // Decimal: 4096
 	else if (form16 == 0x0e)
@@ -221,13 +221,13 @@ function u32 ManiaSpheres.get2DTransformSize16(u8 form16)
 	else if (form16 == 0x08)
 		size = 0x8000 // Decimal: 32768
 	else if (form16 == 0x07)
-		size = 0x9000 // Decimal: 36864 
+		size = 0x9000 // Decimal: 36864
 	else if (form16 == 0x06)
 		size = 0xa000 // Decimal: 40960
 	else if (form16 == 0x05)
 		size = 0xb000 // Decimal: 45056
 	else if (form16 == 0x04)
-		size = 0xc000 // Decimal: 49152 
+		size = 0xc000 // Decimal: 49152
 	else if (form16 == 0x03)
 		size = 0xd000 // Decimal: 53248
 	else if (form16 == 0x02)
@@ -240,10 +240,10 @@ function u32 ManiaSpheres.get2DTransformSize16(u8 form16)
 	return size
 }
 
-function u8 ManiaSpheres.getSphereSize32(u16 size) 
+function u8 ManiaSpheres.getSphereSize32(u16 size)
 {
 	u8 form32 // Size of sphere (0x00 = largest, 0x1f = smallest)
-	 
+	
 	if (size < 0x1740) // Decimal: 5952
 		form32 = 0x1f
 	else if (size < 0x17f0) // Decimal: 6128
@@ -312,10 +312,10 @@ function u8 ManiaSpheres.getSphereSize32(u16 size)
 	return form32
 }
 
-function u8 ManiaSpheres.getSphereSize16(u16 size) 
+function u8 ManiaSpheres.getSphereSize16(u16 size)
 {
 	u8 form16 // Size of sphere (0x00 = largest, 0x0f = smallest)
-	 
+	
 	if (size < 0x1740) // Decimal: 5952
 		form16 = 0x0f
 	else if (size < 0x18a0) // Decimal: 6304
@@ -347,7 +347,7 @@ function u8 ManiaSpheres.getSphereSize16(u16 size)
 	else if (size < 0x4500) // Decimal: 17664
 		form16 = 0x01
 	else
-		form16 = 0x00 
+		form16 = 0x00
 	
 	return form16
 }
