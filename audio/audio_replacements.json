@@ -1,0 +1,22 @@
+{
+	// Get Blue Spheres music (https://gamebanana.com/threads/211136)
+	"1C": { "File": "music/BlueSpheres.ogg", "LoopStart": 407077, "Type": "Music" },
+	"1C_speedup": { "File": "music/BlueSpheresSPD.ogg", "LoopStart": 5309957, "Type": "Music" },
+	"1C_speedup30": { "File": "music/BlueSpheresSPD.ogg", "LoopStart": 5309957, "Type": "Music" },
+	"1C_speedup45": { "File": "music/BlueSpheresSPD45.ogg", "LoopStart": 10374294, "Type": "Music" },
+	// Blue Sphere Plus mod (by Veenee, https://gamebanana.com/mods/297356)
+	"1c_speedmax": { "File": "music/BlueSpheresMax.ogg", "LoopStart": 441095, "Type": "Music" },
+	
+	// Blue sphere collected
+	"65": { "File": "sounds/BlueSphere.ogg", "Type": "Sound" },
+	// All blue spheres collected 
+	"66": { "File": "sounds/SSJettison.ogg", "Type": "Sound" },
+	// Yellow sphere
+	"yellowsphere": { "File": "sounds/YellowSphere.ogg", "Type": "Sound" },
+	// Bumper 
+	"bumper": { "File": "sounds/Bumper.ogg", "Type": "Sound" },
+	// Emerald collected
+	"2B": { "File": "sounds/Emerald.ogg", "Type": "Sound" },
+	// Exit special stage
+	"6A": { "File": "sounds/SSExit.ogg", "Type": "Sound" }
+}

@@ -1,0 +1,42 @@
+{
+	"Metadata":
+	{
+		"Name": "Mania-Styled Blue Spheres",
+		"Author": "FadeInside" ,
+		"Description": "Stylizes special stages and Blue Sphere game, under the style of Sonic Mania. Replacing characters, spheres, HUD, and more with Mania, and also improves the gameplay with different fixes. Don't forget to include Classic Blue Spheres Style in the game options for a better look",
+		"URL": "https://gamebanana.com/mods/333879",
+		"ModVersion": "1.0.5",
+		"GameVersion": "21.09.28.0"
+	},
+	"Settings":
+	{
+		"List":
+		[
+			{
+				"Category": "Render",
+				"InternalName": "SETTING_BS_SHARPGROUND",
+				"DisplayName": "Ground render:",
+				"Variable": "SETTING_BS_SHARPGROUND",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "Smoothed (Default)",
+					"1": "Sharped"
+				}
+			}, 
+			{
+				"Category": "Render",
+				"InternalName": "SETTING_BS_MAINCHARACTER",
+				"DisplayName": "Player render:",
+				"Variable": "SETTING_BS_MAINCHARACTER",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "Main & Second (Default)",
+					"1": "Only Main", 
+					"2": "Switchable"
+				}
+			}
+		]
+	}
+}

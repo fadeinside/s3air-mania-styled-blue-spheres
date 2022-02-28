@@ -1,0 +1,9 @@
+// Switched characters
+global u8 bluespheres.character.main	// Set to the value of getSecondCharacter() after switch
+global u8 bluespheres.character.second	// Set to the value of getMainCharacter() after switch
+global u8 bluespheres.character.check	// Set to 0x01 when use switched characters
+global u8 bluespheres.character.switch	// Set to 0x01 when start playing of slider animation for smoother character switch
+global s32 bluespheres.character.framecounter	// Character switch animation counter
+
+// Checks
+global bool bluespheres.ray_jumped	// true when Ray jumped, to hide his tail

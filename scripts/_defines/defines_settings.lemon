@@ -1,0 +1,3 @@
+// Options
+global u8 SETTING_BS_SHARPGROUND	// Set 0x01 to use the sharped appearance of the ground edges
+global u8 SETTING_BS_MAINCHARACTER	// The type of character render. 0x00 - Default (Main & Second), 0x01 - Only main (Like Mania), 0x02 - Switchable (Press the [Y] button to change the main character)

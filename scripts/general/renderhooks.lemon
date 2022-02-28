@@ -1,0 +1,216 @@
+function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
+{
+	bool prioFlag = (objA0.sprite_attributes & 0x8000) != 0x00
+	
+	//  HUD
+	if (objA0.update_address == 0x008e2a)
+	{
+		s16 rings.counter = (Game.getSetting(SETTING_BS_COUNTDOWN_RINGS) == 0x00) ? bluespheres.rings_collected : (bluespheres.rings_remaining >= 0x3e8) ? 0x00 : bluespheres.rings_remaining
+		
+		ManiaSpheres.renderHUDPlate("SpheresCounterPlate", bluespheres.blue_remaining, getScreenWidth() / 0x02 - 0x70, 0x14, renderQueue)
+		ManiaSpheres.renderHUDPlate("RingsCounterPlate", rings.counter, getScreenWidth() / 0x02 + 0x70, 0x14, renderQueue)
+		
+		if (!hideSecondPlayer() && getNumPlayers() >= 0x02 && SETTING_BS_MAINCHARACTER == 0x02)
+		{
+			if (!Mods.isModActive("Blue Sphere Time Attack"))
+				ManiaSpheres.renderSwitchLabel(getScreenWidth() / 0x02, 0x14, renderQueue)
+			else
+				ManiaSpheres.renderSwitchLabel(getScreenWidth() / 0x02, getScreenHeight() - 16, renderQueue) 
+		}
+		
+		if (Mods.isModActive("Blue Sphere Time Attack"))
+			BlueSpheresTimer.renderTimer(px, py, renderQueue)
+		
+		return true
+	}
+	
+	// Get Blue Spheres text (consists of two objects)
+	if (objA0.update_address == 0x008e94)
+	{
+		if (SETTING_BS_BETA_TITLE == 0x01)
+			px += 0x08
+		if (objA0.animation.sprite == 0x00) // Part 1
+			Renderer.drawCustomSprite("Text_GetBlue", px, py, 0x00, 0x00, renderQueue)
+		if (objA0.animation.sprite == 0x01) // Part 2
+			Renderer.drawCustomSprite((SETTING_BS_BETA_TITLE == 0x01) ? "Text_Balls" : "Text_Spheres", px, py, 0x00, 0x00, renderQueue)
+		return true 
+	}
+	
+	// Perfect text
+	if ((objA0.update_address == 0x008f24 || objA0.update_address == 0x008eec) && u8[0x8e1214] == 0x00)
+	{
+		if (objA0.animation.sprite == 0x02) // Part 1
+			Renderer.drawCustomSprite("Text_Perf", px, py, 0x00, 0x00, renderQueue)
+		if (objA0.animation.sprite == 0x03) // Part 2
+			Renderer.drawCustomSprite("Text_ect", px, py, 0x00, 0x00, renderQueue)
+		return true 
+	}
+	
+	// Switch character stuff
+	if (!hideSecondPlayer() && getNumPlayers() >= 0x02 && SETTING_BS_MAINCHARACTER == 0x02 && (objA0.update_address == 0x00903e || objA0.update_address == 0x00927a)) 
+	{
+		// Basically, all manipulations are made from the main character
+		if (objA0.update_address == 0x00903e)
+		{
+			if (Input.buttonPressed(BUTTON_Y))
+			{
+				if (bluespheres.character.framecounter == 0x00) 
+					bluespheres.character.switch = 0x01
+			}
+			
+			if (bluespheres.character.switch == 0x01) 
+				++bluespheres.character.framecounter
+			
+			if (bluespheres.character.framecounter >= 16)
+			{
+				bluespheres.character.switch = 0x00
+				bluespheres.character.framecounter = 0x00
+				
+				if (bluespheres.character.check == 0x00)
+					bluespheres.character.check = 0x01
+				else
+				{
+					bluespheres.character.check = 0x00
+					bluespheres.character.main = getMainCharacter()
+					bluespheres.character.second = getSecondCharacter()
+				}
+			}
+			
+			py += bluespheres.character.framecounter 
+			
+			if (bluespheres.character.check == 0x01)
+			{
+				bluespheres.character.main = getSecondCharacter()
+				bluespheres.character.second = getMainCharacter()
+			}
+		}
+		
+		if (objA0.update_address == 0x00927a)
+		{
+			if (bluespheres.character.framecounter >= 0x01)
+				renderQueue = 0x9dfd
+			py -= bluespheres.character.framecounter
+		}
+	}
+	
+	// Characters in special stage
+	if (hideSecondPlayer() ? objA0.update_address == 0x00903e : (objA0.update_address == 0x00903e || objA0.update_address == 0x00927a))
+	{
+		bool character.state_idle = (objA0.animation.sprite == 0x01 && bluespheres.started_running == 0x00) 
+		bool character.state_walk = (objA0.animation.sprite <= 0x08 && ((bluespheres.started_running == 0x01) ? (objA0.animation.sprite >= 0x01) : (objA0.animation.sprite >= 0x02)))
+		bool character.state_jump = (objA0.animation.sprite <= 0x0b && objA0.animation.sprite >= 0x09)
+		
+		u32 timer 
+		if !(bluespheres.character.switch == 0x01 && objA0.update_address == 0x00903e)
+			timer = (bluespheres.started_running != 0x00) ? u8[0xffffb000 + 0x24] : (u8[0xfffffeb2] >> 0x01)
+		else if !(character.state_jump) 
+			timer = 0x00
+		
+		u8 character
+		if (bluespheres.character.check == 0x01)
+			character = (objA0.update_address == 0x00927a) ? bluespheres.character.second : bluespheres.character.main
+		else
+			character = (objA0.update_address == 0x00927a) ? getSecondCharacter() : getMainCharacter()
+		
+		u8 atex = (character == CHARACTER_TAILS) ? 0x10 : 0x00
+		
+		u64 key
+		// Ultimate Mighty by Sotaknuck, https://gamebanana.com/mods/54268
+		if (character == CHARACTER_SONIC && (u8[0xffffE654] == 0x01 || Mods.isModActive("Ultimate Mighty")))
+		{
+			if (character.state_idle) 
+				key = stringformat("CharacterMighty_idle_%d", 0x00)
+			else if (character.state_walk) 
+				key = stringformat("CharacterMighty_walk_%d", timer % 0x0c)
+			else if (character.state_jump) 
+				key = stringformat("CharacterMighty_jump_%d", timer % 0x0c)
+		}
+		// Ray the Flying Squirrel by campbellsonic, https://gamebanana.com/mods/54261
+		else if (character == CHARACTER_TAILS && Mods.isModActive("Ray the Flying Squirrel"))
+		{
+			if (character.state_jump) 
+				bluespheres.ray_jumped = true
+			else 
+				bluespheres.ray_jumped = false
+			
+			if (character.state_idle) 
+				key = stringformat("CharacterRay_idle_%d", 0x00)
+			else if (character.state_walk) 
+				key = stringformat("CharacterRay_walk_%d", timer % 0x0c)
+			else if (character.state_jump) 
+				key = stringformat("CharacterRay_jump_%d", timer % 0x0c)
+		}
+		else if (character == CHARACTER_SONIC)
+		{
+			if (character.state_idle) 
+				key = stringformat("CharacterSonic_idle_%d", 0x00)
+			else if (character.state_walk) 
+				key = stringformat("CharacterSonic_walk_%d", timer % 0x0c)
+			else if (character.state_jump) 
+				key = stringformat("CharacterSonic_jump_%d", timer % 0x0c)
+		}
+		else if (character == CHARACTER_TAILS)
+		{
+			if (character.state_idle) 
+				key = stringformat("CharacterMiles_idle_%d", 0x00)
+			else if (character.state_walk) 
+				key = stringformat("CharacterMiles_walk_%d", timer % 0x0c)
+			else if (character.state_jump) 
+				key = stringformat("CharacterMiles_jump_%d", timer % 0x04)
+		}
+		else if (character == CHARACTER_KNUCKLES)
+		{
+			if (character.state_idle) 
+				key = stringformat("CharacterKnuckles_idle_%d", 0x00)
+			else if (character.state_walk) 
+				key = stringformat("CharacterKnuckles_walk_%d", timer % 0x0c)
+			else if (character.state_jump) 
+				key = stringformat("CharacterKnuckles_jump_%d", timer % 0x0c)
+		}
+		
+		u8 alpha = 0xff
+		if (bluespheres.character.switch == 0x01 && (objA0.update_address == 0x00903e)) 
+			alpha = 0x90 // Makes transparency for the main character when switching
+		
+		Renderer.drawCustomSprite(key, px, py, atex, prioFlag ? SPRITE_FLAG_PRIO : 0x00, renderQueue, 0x00, alpha)
+		return true
+	}
+	
+	// Miles Tails
+	if (objA0.update_address == 0x009488)
+	{
+		u64 key
+		u8 alpha = 0xff
+		if (Mods.isModActive("Ray the Flying Squirrel"))
+		{
+			key = stringformat("CharacterRay_tail_%d", objA0.animation.sprite % 0x0b)
+			alpha = !(bluespheres.started_running == 0x00 || bluespheres.ray_jumped) ? 0xff : 0x00
+		}
+		else
+		{
+			key = stringformat("CharacterMiles_tails_%d", objA0.animation.sprite % 0x15)
+		}
+		
+		if (bluespheres.character.switch == 0x01)
+		{
+			if (bluespheres.character.check == 0x01)
+				py += bluespheres.character.framecounter 
+			else
+				py -= bluespheres.character.framecounter
+			
+			if (bluespheres.character.framecounter >= 0x01)
+				renderQueue = 0x9dfd
+			
+			if (bluespheres.character.main == CHARACTER_TAILS)
+				alpha = 0x90
+		}
+		
+		if (bluespheres.character.check == 0x01)
+			renderQueue = 0x9dfe
+		
+		Renderer.drawCustomSprite(key, px, py, 0x10, prioFlag ? SPRITE_FLAG_PRIO : 0x00, renderQueue, 0x00, alpha)
+		return true
+	}
+	
+	return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
+}
