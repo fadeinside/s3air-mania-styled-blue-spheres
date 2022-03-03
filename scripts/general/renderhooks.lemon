@@ -116,7 +116,7 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 		
 		u64 key
 		// Ultimate Mighty by Sotaknuck, https://gamebanana.com/mods/54268
-		if (character == CHARACTER_SONIC && (u8[0xffffE654] == 0x01 || Mods.isModActive("Ultimate Mighty")))
+		if ((character == CHARACTER_SONIC && (u8[0xffffe654] == 0x01 || Mods.isModActive("Ultimate Mighty"))) || CHARS_KNUCKLES_ALONE && u8[0xffffe654] == 0x01) 
 		{
 			if (character.state_idle)
 				key = stringformat("CharacterMighty_idle_%d", 0x00)
