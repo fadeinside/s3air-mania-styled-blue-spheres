@@ -12,7 +12,7 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 		
 		if (!hideSecondPlayer() && getNumPlayers() >= 0x02 && SETTING_BS_MAINCHARACTER == 0x02)
 		{
-			if (!Mods.isModActive("Blue Sphere Time Attack"))
+			if !(Mods.isModActive("Blue Sphere Time Attack"))
 				ManiaSpheres.renderSwitchLabel(getScreenWidth() / 0x02, 0x14, renderQueue)
 			else
 				ManiaSpheres.renderSwitchLabel(getScreenWidth() / 0x02, getScreenHeight() - 16, renderQueue)

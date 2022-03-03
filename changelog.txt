@@ -1,9 +1,10 @@
-// Update 1.0.5 - Compatibility
-// + Добавлена совместимость с "Extra Slot Mighty" by iCloudius, теперь вам не нужно использовать Аддон для его работы (Required latest version 3.0 of Extra Slot Mighty, and install it below)
+// Update 1.0.5 - The compatibility and polishing
+// + Добавлена адресная совместимость с "Extra Slot Mighty" by iCloudius, теперь вам не нужно использовать Аддон для его работы (Required latest version 3.0 of Extra Slot Mighty, and install it below)
 // + Добавлена совместимость с "Sonic 3D in 2D Ring Glow Effect" by GFX32 (Can be installed in any order)
 // + Добавлена совместимость с "Blue Sphere Time Attack" (Install it below)
 // + Добавлен режим "Switchable" для "Render mode" - Теперь вы можете переключать персонажей между собой клавишей [Y]
-// + Хвост Тейлза теперь имеет full framerate
-// + Уменьшен размер колец
+// + Хвост Тейлза теперь имеет full framerate, до этого он был несколько ограничен
+// + Майти теперь правильно определяется, если специальный этап был загружен из Левел селекта
 // + Оптимизированы некоторые функции
+// + Уменьшен размер колец
 // + Другие незначительные исправления
