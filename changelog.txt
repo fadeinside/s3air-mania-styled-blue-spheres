@@ -1,10 +1,11 @@
 // Update 1.0.5 - The compatibility and polishing
-// + Добавлена адресная совместимость с "Extra Slot Mighty" by iCloudius, теперь вам не нужно использовать Аддон для его работы (Required latest version 3.0 of Extra Slot Mighty, and install it below)
-// + Добавлена совместимость с "Sonic 3D in 2D Ring Glow Effect" by GFX32 (Can be installed in any order)
-// + Добавлена совместимость с "Blue Sphere Time Attack" (Install it below)
-// + Добавлен режим "Switchable" для "Render mode" - Теперь вы можете переключать персонажей между собой клавишей [Y]
-// + Хвост Тейлза теперь имеет full framerate, до этого он был несколько ограничен
-// + Майти теперь правильно определяется, если специальный этап был загружен из Левел селекта
-// + Оптимизированы некоторые функции
-// + Уменьшен размер колец
-// + Другие незначительные исправления
+// + Added address compatibility with "Extra Slot Mighty" by iCloudius, now you don't need to use an Addon to make it work (Required latest version 3.0+ of Extra Slot Mighty, and install it below)
+// + Added compatibility with "Sonic 3D in 2D Ring Glow Effect" by GFX32 (Can be installed in any order)
+// + Added compatibility with "Blue Sphere Time Attack" (Install it below)
+// + Added "Switchable" mode for "Render mode" - Now you can switch characters between each other with the [Y] key
+// + Tails' tail now has a full framerate, before that it was somewhat limited
+// + Mighty is now correctly detected if a special stage was loaded from the Level Select
+// + The second character now playing the sound of spring when touching a Yellow sphere
+// + Optimized some functions
+// + Reduced ring size
+// + Other minor fixes
