@@ -27,7 +27,7 @@
 			{
 				"Category": "Render",
 				"InternalName": "SETTING_BS_MAINCHARACTER",
-				"DisplayName": "Player render:",
+				"DisplayName": "Character render:",
 				"Variable": "SETTING_BS_MAINCHARACTER",
 				"DefaultValue": "0",
 				"Options":
