@@ -1,2 +1,0 @@
-// Config
-global u8 SETTING_BS_BETA_TITLE	= 0x00	// Set 0x01 to use "Get Blue Balls" instead of "Get Blue Spheres" title

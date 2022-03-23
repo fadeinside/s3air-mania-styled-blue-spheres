@@ -1,0 +1,33 @@
+{
+	// Display counters
+	"display_hud_bluecounter": { "File": "display/display_hud.png", "Rect": "1,1,77,22", "Center": "29,11" },
+	"display_hud_ringscounter": { "File": "display/display_hud.png", "Rect": "1,24,77,22", "Center": "48,11" },
+	
+	// Display numbers
+	"display_hud_number_0": { "File": "display/display_hud.png", "Rect": "79,1,16,14", "Center": "8,7" },
+	"display_hud_number_1": { "File": "display/display_hud.png", "Rect": "96,1,16,14", "Center": "8,7" },
+	"display_hud_number_2": { "File": "display/display_hud.png", "Rect": "113,1,16,14", "Center": "8,7" },
+	"display_hud_number_3": { "File": "display/display_hud.png", "Rect": "130,1,16,14", "Center": "8,7" },
+	"display_hud_number_4": { "File": "display/display_hud.png", "Rect": "147,1,16,14", "Center": "8,7" },
+	"display_hud_number_5": { "File": "display/display_hud.png", "Rect": "164,1,16,14", "Center": "8,7" },
+	"display_hud_number_6": { "File": "display/display_hud.png", "Rect": "181,1,16,14", "Center": "8,7" },
+	"display_hud_number_7": { "File": "display/display_hud.png", "Rect": "198,1,16,14", "Center": "8,7" },
+	"display_hud_number_8": { "File": "display/display_hud.png", "Rect": "215,1,16,14", "Center": "8,7" },
+	"display_hud_number_9": { "File": "display/display_hud.png", "Rect": "232,1,16,14", "Center": "8,7" },
+	
+	// "Get Blue Spheres" Display text
+	"display_text_getbluespheres_1": { "File": "display/display_text.png", "Rect": "1,1,80,16", "Center": "80,8" },
+	"display_text_getbluespheres_2": { "File": "display/display_text.png", "Rect": "82,1,80,16", "Center": "0,8" },
+	
+	// "Perfect" Display text
+	"display_text_perfect_1": { "File": "display/display_text.png", "Rect": "1,18,48,16", "Center": "44,8" },
+	"display_text_perfect_2": { "File": "display/display_text.png", "Rect": "50,18,40,16", "Center": "-4,8" },
+	
+	// "Not enough rings" Display text (Needed Blue Sphere Time Attack mod)
+	"display_text_notenoughrings_1": { "File": "display/display_text.png", "Rect": "1,35,80,16", "Center": "80,8" },
+	"display_text_notenoughrings_2": { "File": "display/display_text.png", "Rect": "82,35,76,16", "Center": "0,8" },
+	
+	// "Time over" Display text (Needed Blue Sphere Time Attack mod)
+	"display_text_timeover_1": { "File": "display/display_text.png", "Rect": "1,52,50,16", "Center": "50,8" },
+	"display_text_timeover_2": { "File": "display/display_text.png", "Rect": "52,52,50,16", "Center": "0,8" }
+}

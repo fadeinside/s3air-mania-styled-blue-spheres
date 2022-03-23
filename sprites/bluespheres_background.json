@@ -1,4 +1,0 @@
-{
-	"GlowBackground": { "File": "bluespheres_background.png", "Rect": "1,1,256,114", "Center": "256,0" },
-	"GlowForeground": { "File": "bluespheres_background.png", "Rect": "1,116,256,114", "Center": "256,0" }
-} 

@@ -1,0 +1,5 @@
+{
+	// Sharp horizont
+	"horizont_sharp_background": { "File": "horizont/horizont_sharp.png", "Rect": "1,1,250,114", "Center": "250,0" },
+	"horizont_sharp_foreground": { "File": "horizont/horizont_sharp.png", "Rect": "1,116,250,114", "Center": "250,0" }
+} 

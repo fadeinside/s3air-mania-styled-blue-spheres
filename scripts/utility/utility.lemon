@@ -1,84 +1,14 @@
-//@ Function taken from sonic3air_dev/scripts/objects/basics/giantring.lemon
-//# address-hook(0x061682) end(0x061690)
-function void GiantRing.BaseUpdate()
-{
-	// Targets:
-	// - 0x06169a	-> objA0.base_state = 0x00  -> Initialization
-	// - 0x0616e6	-> objA0.base_state = 0x02  -> Regular update
-	// - 0x0617b8	-> objA0.base_state = 0x04  -> Character jumped in
-	
-	if (objA0.base_state == 0x04)
-		ManiaSpheres.resetCharacters()
-	base.GiantRing.BaseUpdate()
-}
-
-//@ Function taken from sonic3air_dev/scripts/general/bluesphere/bluespheregame.lemon
-//# address-hook(0x04d3ce) end(0x04d482)
-function void fn04d3ce()
-{
-	if (control.pad1.pressed & CONTROL_START)
-		ManiaSpheres.resetCharacters()
-	base.fn04d3ce()
-}
+global u8 bluespheres.ring.timer		// Ring timerrate
+global u8 bluespheres.ring.framerate	// Ring framerate animation
 
 //@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
-//# address-hook(0x009212) end(0x009274)
-function void fn009212()
-{
-	// Clear the function when active
-	if !(hideSecondPlayer() && getSecondCharacter() == CHARACTER_TAILS)
-		base.fn009212()
-}
-
-//# address-hook(0x009d9e) end(0x009dc8)
-function void fn009d9e()
-{
-	++u8[0xfffffeb2]
-	if (u8[0xfffffeb2] >= 0x1e)
-		u8[0xfffffeb2] = 0x00
-}
-
-//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
-//# address-hook(0x009488) end(0x0094d2)
-function void fn009488()
-{
-	if (bluespheres.character.check == 0x01)
-	{
-		objA0.position.x.u16 = u16[0xffffb000 + 0x10]
-		objA0.position.y.u16 = u16[0xffffb000 + 0x14]
-	}
-	else
-	{
-		A1 = 0xffff0000 + objA0.value3e
-		objA0.position.x.u16 = objA1.position.x.u16
-		objA0.position.y.u16 = objA1.position.y.u16
-	}
-	
-	D0.u16 = 0x5aaa
-	D1.s16 = bluespheres.movement_speed
-	if (D1.s16 >= 0x00)
-		D0.u16 += D1.s16
-	
-	s32 result = s32(u16[A0 + 0x24]) + s32(D0.u16)
-	u16[A0 + 0x24] = u16(result)
-	
-	if (result & 0x10000)
-	{
-		++objA0.animation.sprite
-		if (objA0.animation.sprite >= 0x15)
-			objA0.animation.sprite = 0x00
-	}
-	
-	// Don't render the Tails' tails when active
-	if !(hideSecondPlayer() && getSecondCharacter() == CHARACTER_TAILS)
-		DrawObject()
-}
-
 //# address-hook(0x009b62) end(0x009d1c)
 function void fn009b62()
 {
+	// All spheres were collected
 	if (u8[0xffffe44c] == 0x01)
 	{
+		// Wait until the spheres lift
 		if (bluespheres.lifted_height < 0x100)
 		{
 			if (bluespheres.lifted_height == 0x00)
@@ -86,10 +16,12 @@ function void fn009b62()
 			bluespheres.lifted_height += (bluespheres.lifted_height >= 0x7d) ? 0x04 : (bluespheres.lifted_height >= 0x3e) ? 0x03 : 0x02
 			return
 		}
+		
 		//Fade out any music
 		playMusic(MUSIC_CTRL_FADEOUT)
 	}
 	
+	// Call the base function
 	base.fn009b62()
 }
 
@@ -127,7 +59,7 @@ function void fn00927a()
 
 	fn009402()
 
-	if (u8[A0 + 0x44] == 0x05 && u8[0xffffe44c] == 0x00 && s8[0xffffe440] >= 0x00 && (u8[0xffffef7c] && 0x01) == 0x00) // && adds a check for D.A. Garden green spheres
+	if (u8[A0 + 0x44] == 0x05 && u8[0xffffe44c] == 0x00 && s8[0xffffe440] >= 0x00 && !(u8[0xffffef7c] && 0x01))
 	{
 		if ((bluespheres.direction & 0x3f) == 0x00)
 		{
@@ -177,9 +109,6 @@ function void fn00927a()
 //# address-hook(0x00972e) end(0x0098ae)
 function void fn00972e()
 {
-	if (Mods.isModActive("Blue Sphere Time Attack"))
-		BlueSpheresTimer.Achievements.spheresChecks()
-	
 	A1 = 0xfffff100
 	D0.u16 = ((bluespheres.position.x + 0x80) >> 0x08) & 0x1f
 	D1.u16 = ((bluespheres.position.y + 0x80) >> 0x08) & 0x1f
@@ -188,6 +117,7 @@ function void fn00972e()
 	A1 += D1.s16
 	D2.u8 = u8[A1]
 	
+	// Bumper
 	if (D2.u8 == 0x03)
 	{
 		// Running into bumber
@@ -199,9 +129,9 @@ function void fn00972e()
 			Audio.playAudio("bumper")
 		}
 	}
-	else if (D2.u8 == 0x05 && (u8[0xffffef7c] && 0x01) == 0x00) // && adds a check for D.A. Garden green spheres
+	// Yellow sphere
+	else if (D2.u8 == 0x05 && !(u8[0xffffef7c] && 0x01))
 	{
-		// Yellow spring sphere
 		if (u8[0xffffe44c] == 0x00 && (u8[0xffffe432] & 0x80) == 0x00)
 		{
 			D0.u8 = bluespheres.direction & 0x3f
@@ -215,6 +145,22 @@ function void fn00972e()
 	}
 	else
 	{
+		// Call the base function. Compatibility issues
 		base.fn00972e()
 	}
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
+//# address-hook(0x009d9e) end(0x009dc8)
+function void fn009d9e()
+{
+	// Setup
+	++bluespheres.ring.timer
+	if (bluespheres.ring.timer >= 0x1e)
+		bluespheres.ring.timer = 0x00
+	
+	bluespheres.ring.framerate = bluespheres.ring.timer >> 0x01
+	
+	// Call the base function
+	base.fn009d9e()
 }
