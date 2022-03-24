@@ -1,5 +1,5 @@
 //? Draw a custom spheres.
-function void SpheresCostumer.renderCustomSpheres(u16 px, u16 py, u16 renderQueue, u8 alpha, u32 fog, u8 sphereID, u8 sphereSize32, u8 sphereSize16)
+function void SpheresModSupport.renderCustomSpheres(u16 px, u16 py, u16 renderQueue, u8 alpha, u32 fog, u8 sphereID, u8 sphereSize32, u8 sphereSize16)
 {
 	// Use 32 frames for all types of spheres except emeralds and sparkles
 	u8 sphereSize
@@ -12,7 +12,7 @@ function void SpheresCostumer.renderCustomSpheres(u16 px, u16 py, u16 renderQueu
 	if (sphereID == 0x04 && Renderer.hasCustomSprite(stringformat("sphere_ring_%d", bluespheres.ring.framerate)))
 	{
 		u64 key = stringformat("sphere_ring_%d", bluespheres.ring.framerate)
-		u32 transform2D = (SpheresCostumer.Manager.get2DTransformSize16(sphereSize16) * 0x02) / 0x03
+		u32 transform2D = (SpheresModSupport.Manager.get2DTransformSize16(sphereSize16) * 0x02) / 0x03
 		Renderer.drawCustomSpriteWithTransform(key, px, py + ManiaSpheres.Manager.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0xffffffff, transform2D + ManiaSpheres.Manager.get2DTransformRingCamera(sphereSize16), 0x00, 0x00, transform2D)
 	}
 	else
@@ -23,16 +23,16 @@ function void SpheresCostumer.renderCustomSpheres(u16 px, u16 py, u16 renderQueu
 			Renderer.drawCustomSprite("3d2dring_glow", px, py, 0x00, 0x00, renderQueue - 0x01, 0x00, 0x8f - ((bluespheres.ring.framerate - 0x04) * 0x1f))
 		
 		// Call the base function
-		base.SpheresCostumer.renderCustomSpheres(px, py, renderQueue, alpha, fog, sphereID, sphereSize32, sphereSize)
+		base.SpheresModSupport.renderCustomSpheres(px, py, renderQueue, alpha, fog, sphereID, sphereSize32, sphereSize)
 	}
 }
 
 //? Draw a custom ground.
-function void SpheresCostumer.renderCustomGround()
+function void SpheresModSupport.renderCustomGround()
 {
 	if !(SETTING_BS_SHARPGROUND && !(Game.getSetting(SETTING_BS_VISUAL_STYLE) & 0x02))
 	{
-		base.SpheresCostumer.renderCustomGround()
+		base.SpheresModSupport.renderCustomGround()
 		return
 	}
 	

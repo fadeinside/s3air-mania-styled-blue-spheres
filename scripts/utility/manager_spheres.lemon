@@ -1,5 +1,5 @@
 //? Returns the emerald sprite key.
-function u64 SpheresCostumer.Manager.getEmeraldSprite(u8 sphereID, u8 emeraldColorID, u8 sphereSize16)
+function u64 SpheresModSupport.Manager.getEmeraldSprite(u8 sphereID, u8 emeraldColorID, u8 sphereSize16)
 {
 	// Replace Yellow Emerald with Orange, and Orange with Yellow, if the mod "Yellow Emerald" is active. Otherwise use the original position
 	u8 emeraldColor
@@ -23,7 +23,7 @@ function u64 SpheresCostumer.Manager.getEmeraldSprite(u8 sphereID, u8 emeraldCol
 		sphereID = 0x0d
 	
 	// Return the base function, with the changes made above
-	return base.SpheresCostumer.Manager.getEmeraldSprite(sphereID, emeraldColor, sphereSize16)
+	return base.SpheresModSupport.Manager.getEmeraldSprite(sphereID, emeraldColor, sphereSize16)
 }
 
 //? Returns the ring transformation. The closer the ring is to the camera, the more "flattened" it becomes.
