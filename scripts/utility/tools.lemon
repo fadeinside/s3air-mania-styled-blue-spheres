@@ -1,33 +1,5 @@
-//? Returns the emerald sprite key.
-function u64 SpheresModSupport.Manager.getEmeraldSprite(u8 sphereID, u8 emeraldColorID, u8 sphereSize16)
-{
-	// Replace Yellow Emerald with Orange, and Orange with Yellow, if the mod "Yellow Emerald" is active. Otherwise use the original position
-	u8 emeraldColor
-	// "Yellow Emerald" by Guthi, check https://gamebanana.com/mods/54326
-	if (Mods.isModActive("Yellow Emerald"))
-	{
-		if (emeraldColorID == 0x01)
-			emeraldColor = 0x07
-		else if (emeraldColorID == 0x07)
-			emeraldColor = 0x01
-		else
-			emeraldColor = emeraldColorID
-	}
-	else
-	{
-		emeraldColor = emeraldColorID
-	}
-	
-	// "3D Side View Chaos Emeralds" by Agnoristos, check https://gamebanana.com/mods/322550
-	if (Mods.isModActive("3D Side View Chaos Emeralds"))
-		sphereID = 0x0d
-	
-	// Return the base function, with the changes made above
-	return base.SpheresModSupport.Manager.getEmeraldSprite(sphereID, emeraldColor, sphereSize16)
-}
-
 //? Returns the ring transformation. The closer the ring is to the camera, the more "flattened" it becomes.
-function u32 ManiaSpheres.Manager.get2DTransformRingCamera(u8 sphereSize16)
+function u32 ManiaSpheres.get2DTransformRingCamera(u8 sphereSize16)
 {
 	u32 sphereTransform
 
@@ -48,7 +20,7 @@ function u32 ManiaSpheres.Manager.get2DTransformRingCamera(u8 sphereSize16)
 }
 
 //? Returns the Y-axis ring offset. The closer the ring is to the camera, the more it will be to the ground.
-function u32 ManiaSpheres.Manager.getRepositionRingY(u8 sphereSize32)
+function u32 ManiaSpheres.getRepositionRingY(u8 sphereSize32)
 {
 	u32 sphereReposition
 

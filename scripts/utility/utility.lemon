@@ -1,4 +1,4 @@
-global u8 bluespheres.ring.timer		// Ring timerrate
+global u8 bluespheres.ring.timer		// Ring timerate
 global u8 bluespheres.ring.framerate	// Ring framerate animation
 
 //@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
@@ -146,6 +146,38 @@ function void fn00972e()
 	else
 	{
 		// Call the base function. Compatibility issues
+		base.fn00972e()
+	}
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
+//# address-hook(0x00972e) end(0x0098ae)
+function void fn00972e()
+{
+	// Determine which sphere is in front of us
+	A1 = 0xfffff100
+	D0.u16 = ((bluespheres.position.x + 0x80) >> 0x08) & 0x1f
+	D1.u16 = ((bluespheres.position.y + 0x80) >> 0x08) & 0x1f
+	D1.u16 <<= 0x05
+	D1.u8 |= D0.u8
+	A1 += D1.s16
+	D2.u8 = u8[A1]
+	
+	// Ring sphere
+	if (D2.u8 == 0x04)
+	{
+		// Check if you are inside the ring now, then collect it. Like a Sonic Mania
+		D0.u16 = (bluespheres.position.x | bluespheres.position.y) & 0xe0
+		if (D0.u16 == 0x00)
+		{
+			// Call the base function
+			base.fn00972e()
+		}
+	}
+	// If it's not a ring, then call the base function for compatibility with other mods that make changes here
+	else
+	{
+		// Call the base function
 		base.fn00972e()
 	}
 }
