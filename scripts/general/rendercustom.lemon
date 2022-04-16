@@ -11,7 +11,7 @@ function void SpheresModSupport.renderCustomSpheres(u16 px, u16 py, u16 renderQu
 	// Ring with 2D Transform
 	if (sphereID == 0x04 && Renderer.hasCustomSprite(stringformat("sphere_ring_%d", bluespheres.ring.framerate)))
 	{
-		u64 key = stringformat("sphere_ring_%d", bluespheres.ring.framerate)
+		string key = stringformat("sphere_ring_%d", bluespheres.ring.framerate)
 		u32 transform2D = (SpheresModSupport.get2DTransformSize16(sphereSize16) * 0x02) / 0x03
 		Renderer.drawCustomSpriteWithTransform(key, px, py + ManiaSpheres.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0xffffffff, transform2D + ManiaSpheres.get2DTransformRingCamera(sphereSize16), 0x00, 0x00, transform2D)
 	}
