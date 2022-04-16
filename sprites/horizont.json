@@ -5,5 +5,5 @@
 	
 	// Smooth horizont
 	"horizont_smooth_background": { "File": "horizont/horizont_smooth.png", "Rect": "1,1,250,114", "Center": "250,-1" },
-	"horizont_smooth_foreground": { "File": "horizont/horizont_smooth.png", "Rect": "1,116,250,114", "Center": "250,-1" }
+	"horizont_smooth_foreground": { "File": "horizont/horizont_smooth.png", "Rect": "1,116,250,114", "Center": "250,0" }
 } 
