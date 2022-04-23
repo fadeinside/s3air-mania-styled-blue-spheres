@@ -26,131 +26,6 @@ function void fn009b62()
 }
 
 //@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
-//# address-hook(0x00927a) end(0x009378)
-function void fn00927a()
-{
-	D0 = 0x0c
-	D1.u16 = bluespheres.movement_speed
-	if (D1.u16 != 0x00)
-	{
-		D1.s16 >>= 0x05
-		u16[A0 + 0x24] += D1.u16
-		D0 = objA0.animation.timer
-		
-		if (D0.s8 < 0x00)
-			D0.u8 += 0x0c
-		else if (D0.u8 >= 0x0c)
-			D0.u8 -= 0x0c
-	}
-	objA0.animation.timer = D0.u8
-
-	A1 = 0x0091e8
-	if (u8[0xffffe440] != 0x00)
-	{
-		A1 = 0x009204
-		D1.u16 = bluespheres.movement_speed
-		if (D1.u16 == 0x00)
-		{
-			D0.u8 = level.framecounter.low
-			D0.u16 &= 0x03
-		}
-	}
-	objA0.animation.sprite = u8[A1 + D0.s16]
-
-	fn009402()
-
-	if (u8[A0 + 0x44] == 0x05 && u8[0xffffe44c] == 0x00 && s8[0xffffe440] >= 0x00 && !(u8[0xffffef7c] && 0x01))
-	{
-		if ((bluespheres.direction & 0x3f) == 0x00)
-		{
-			u32[A0 + 0x40] = 0xffe80000
-			u8[0xffffe440] = 0x81
-			Audio.playAudio("yellowsphere")
-		}
-	}
-
-	fn00937c()
-	D0.u16 &= 0x70
-	if (D0.u16 != 0x00 && u8[0xffffe440] == 0x00)
-	{
-		u32[A0 + 0x40] = 0xfff00000
-		u8[0xffffe440] = 0x80
-		playSound(0x62)
-	}
-
-	if (s8[0xffffe440] < 0x00)
-	{
-		D0 = u32[A0 + 0x3c] + u32[A0 + 0x40]
-		if (D0.s32 >= 0x00)
-		{
-			D0 = 0x00
-			u32[A0 + 0x40] = 0x00
-			u8[0xffffe440] = 0x00
-		}
-		
-		D1.s32 = s16(bluespheres.current_gamespeed) << 0x04
-		u32[A0 + 0x40] += D1
-		u32[A0 + 0x3c] = D0
-		D0 = (D0 << 0x10) + (D0 >> 0x10)
-		D0.u16 -= 0x800
-		u16[A0 + 0x36] = D0.u16
-	}
-
-	fn00953e()
-	DrawObject()
-
-	A2 = 0x2908d2
-	D6 = 0x28f95a
-	D4.u16 = 0xfd60
-	fn0091a2()
-}
-
-//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
-//# address-hook(0x00972e) end(0x0098ae)
-function void fn00972e()
-{
-	A1 = 0xfffff100
-	D0.u16 = ((bluespheres.position.x + 0x80) >> 0x08) & 0x1f
-	D1.u16 = ((bluespheres.position.y + 0x80) >> 0x08) & 0x1f
-	D1.u16 <<= 0x05
-	D1.u8 |= D0.u8
-	A1 += D1.s16
-	D2.u8 = u8[A1]
-	
-	// Bumper
-	if (D2.u8 == 0x03)
-	{
-		// Running into bumber
-		if (u8[0xffffe42b] == 0x00)
-		{
-			u16[0xffffe44e] = D1.u16
-			u8[0xffffe42b] = 0x01
-			bluespheres.going_forward = 0x00
-			Audio.playAudio("bumper")
-		}
-	}
-	// Yellow sphere
-	else if (D2.u8 == 0x05 && !(u8[0xffffef7c] && 0x01))
-	{
-		if (u8[0xffffe44c] == 0x00 && (u8[0xffffe432] & 0x80) == 0x00)
-		{
-			D0.u8 = bluespheres.direction & 0x3f
-			if (D0.u8 == 0x00)
-			{
-				u32[A0 + 0x40] = 0xffe80000
-				u8[0xffffe432] = 0x81
-				Audio.playAudio("yellowsphere")
-			}
-		}
-	}
-	else
-	{
-		// Call the base function. Compatibility issues
-		base.fn00972e()
-	}
-}
-
-//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
 //# address-hook(0x00972e) end(0x0098ae)
 function void fn00972e()
 {
@@ -168,7 +43,7 @@ function void fn00972e()
 	{
 		// Check if you are inside the ring now, then collect it. Like a Sonic Mania
 		D0.u16 = (bluespheres.position.x | bluespheres.position.y) & 0xe0
-		if (D0.u16 == 0x00)
+		if (D0.u16 == 0x00 || D0.u16 == 0xe0)
 		{
 			// Call the base function
 			base.fn00972e()

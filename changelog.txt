@@ -1,9 +1,11 @@
 // Follow the latest changes on GitHub: https://github.com/fadeinside/s3air-mania-styled-blue-spheres
 
-// Update v1.0.6 - Mania Improvements
-// Note: Mania-Styled Blue Spheres receives a new update, in the form of a migration to the "Blue Spheres Costumer" framework functionality and few improvements. -Fade
-// + Migrate to the "Blue Spheres Costumer" framework functionality (Be sure to install it below).
+// Release v1.0.6 - The Release 2
+// Note: Mania-Styled Blue Spheres receives a new update in the form of a migration to the "Blue Spheres Costumer" framework functionality and few improvements. -Fade
+// + Migrate to the "Blue Spheres Sprite Mod Support" framework functionality (Requre to install).
+// + Added compatibility with "Extra Slot Ray" by iCloudius (Install it below).
 // + The rings will now be moved closer to the ground when approaching the camera.
+// + Способ "подбирания" колец теперь схож с тем, как это делает Mania. 
 // + The background horizon is now painted to fit Mania's style more.
 
 // Update v1.0.5 - The compatibility and polishing
