@@ -3,7 +3,7 @@ function void SpheresModSupport.renderCustomSpheres(u16 px, u16 py, u16 renderQu
 {
 	// Use 32 frames for all types of spheres except emeralds and sparkles
 	u8 sphereSize
-	if ((sphereID >= 0x01 && sphereID <= 0x05) || sphereID == 0x0a || sphereID == 0x0c)
+	if ((sphereID >= 0x01 && sphereID <= 0x05) || sphereID == 0x0a || sphereID == 0x0c || sphereID == 0x0e)
 		sphereSize = sphereSize32
 	else
 		sphereSize = sphereSize16
@@ -32,13 +32,14 @@ function void SpheresModSupport.renderCustomGround()
 {
 	if !(SETTING_BS_SHARPGROUND && !(Game.getSetting(SETTING_BS_VISUAL_STYLE) & 0x02))
 	{
+		// Call the base function
 		base.SpheresModSupport.renderCustomGround()
 		return
 	}
 	
 	u32 fieldColorBaseAddress = u32[0xffffe446]
 	Game.renderBlueSpheresGround(bluespheres.position.x, bluespheres.position.y, bluespheres.direction, u16[fieldColorBaseAddress], u16[fieldColorBaseAddress+0x08])
-	for (s16 i = 0x00; i < 0x40; i++)
+	for (u8 A = 0x00; A < 0x40; ++A)
 	{
 		Renderer.drawCustomSprite(Game.getBlueSpheresGroundSprite(0x01), 0x00, 0x00, 0x00, 0x00, 0x3000)
 	}

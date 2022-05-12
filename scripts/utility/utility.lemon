@@ -8,17 +8,11 @@ function void fn009b62()
 	// All spheres were collected
 	if (u8[0xffffe44c] == 0x01)
 	{
-		// Wait until the spheres lift
-		if (bluespheres.lifted_height < 0x100)
+		if !(bluespheres.lifted_height < 0x100)
 		{
-			if (bluespheres.lifted_height == 0x00)
-				playMusic(0x66)
-			bluespheres.lifted_height += (bluespheres.lifted_height >= 0x7d) ? 0x04 : (bluespheres.lifted_height >= 0x3e) ? 0x03 : 0x02
-			return
+			//Fade out any music
+			playMusic(MUSIC_CTRL_FADEOUT)
 		}
-		
-		//Fade out any music
-		playMusic(MUSIC_CTRL_FADEOUT)
 	}
 	
 	// Call the base function

@@ -7,14 +7,15 @@
 	// Blue Sphere Plus mod (by Veenee, https://gamebanana.com/mods/297356)
 	"1c_speedmax": { "File": "music/BlueSpheresMax.ogg", "LoopStart": 441095, "Type": "Music" },
 	
+	// Yellow sphere
+	"sfx_yellowsphere": { "File": "sounds/YellowSphere.ogg", "Type": "Sound" },
+	// Bumper
+	"sfx_bumper": { "File": "sounds/Bumper.ogg", "Type": "Sound" },
+	
 	// Blue sphere collected
 	"65": { "File": "sounds/BlueSphere.ogg", "Type": "Sound" },
 	// All blue spheres collected
 	"66": { "File": "sounds/SSJettison.ogg", "Type": "Sound" },
-	// Yellow sphere
-	"yellowsphere": { "File": "sounds/YellowSphere.ogg", "Type": "Sound" },
-	// Bumper
-	"bumper": { "File": "sounds/Bumper.ogg", "Type": "Sound" },
 	// Emerald collected
 	"2B": { "File": "sounds/Emerald.ogg", "Type": "Sound" },
 	// Exit special stage

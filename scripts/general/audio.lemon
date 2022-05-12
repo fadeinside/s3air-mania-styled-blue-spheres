@@ -4,12 +4,12 @@ function void Standalone.playAudio(u8 sfxId)
 	string soundKey = sfxId
 	if (sfxId == 0xaa && global.game_mode == 0x34)
 	{
-		soundKey = "bumper"
+		soundKey = "sfx_bumper"
 		Audio.playAudio(soundKey, AudioContext.CONTEXT_SOUND)
 	}
 	else if (sfxId == 0xb1 && global.game_mode == 0x34)
 	{
-		soundKey = "yellowsphere"
+		soundKey = "sfx_yellowsphere"
 		Audio.playAudio(soundKey, AudioContext.CONTEXT_SOUND)
 	}
 	else
