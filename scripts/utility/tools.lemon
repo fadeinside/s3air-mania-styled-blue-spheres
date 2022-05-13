@@ -19,11 +19,9 @@ function string SpheresModSupport.getEmeraldSprite(u8 sphereID, u8 sphereSize16)
 	string emeraldType = (sphereID == 0x0b) ? "chaos" : "super"
 	
 #if GAMEAPP >= 0x21091200
-	// Replace Yellow Emerald with Orange, and Orange with Yellow, if the mod "Yellow Emerald" is active. Otherwise use the original position
 	u8 emeraldColor = emeraldColorID
-	
-	// "Yellow Emerald" by Guthi, check https://gamebanana.com/mods/54326
-	if (Mods.isModActive("Yellow Emerald"))
+	// Replace Yellow Emerald with Orange, and Orange with Yellow, if the mod "Yellow Emerald" is active. Otherwise use the original position
+	if (MOD_YELLOW_EMERALD_ACTIVE)
 	{
 		if (emeraldColorID == 0x01)
 			emeraldColor = 0x07
@@ -32,8 +30,7 @@ function string SpheresModSupport.getEmeraldSprite(u8 sphereID, u8 sphereSize16)
 		emeraldColorID = emeraldColor
 	}
 	
-	// "3D Side View Chaos Emeralds" by Agnoristos, check https://gamebanana.com/mods/322550
-	if (Mods.isModActive("3D Side View Chaos Emeralds"))
+	if (MOD_3D_SIDE_EMERALDS_ACTIVE)
 		emeraldType = "super"
 #endif 
 	

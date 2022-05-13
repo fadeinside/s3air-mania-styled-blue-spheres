@@ -50,8 +50,7 @@ function void SpheresModSupport.renderCustomSpheres(u16 px, u16 py, u16 renderQu
 		Renderer.drawCustomSpriteWithTransform(key, px, py + ManiaSpheres.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0xffffffff, transform2D, 0x00, 0x00, transform2D)
 		
 		// Glow effect for rings sparkles
-		// "Sonic 3D in 2D Ring Glow Effect" by GFX32, https://gamebanana.com/mods/360033
-		if (Mods.isModActive("Sonic 3D in 2D Ring Glow Effect") && Renderer.hasCustomSprite("3d2dring_glow"))
+		if (MOD_GFX32_RING_GLOW_ACTIVE && Renderer.hasCustomSprite("3d2dring_glow"))
 		{
 			Renderer.drawCustomSpriteWithTransform("3d2dring_glow", px, py + ManiaSpheres.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0x80ffffff, transform2D, 0x00, 0x00, transform2D)
 		}

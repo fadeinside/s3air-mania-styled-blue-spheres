@@ -1,0 +1,15 @@
+// Mods check
+// "Extra Slot Mighty" by iCloudius, check https://gamebanana.com/mods/336038
+define bool MOD_EXTRA_MIGHTY_ACTIVE	= Mods.isModActive("Extra Slot Mighty")
+// "Ultimate Mighty" by Sotaknuck, check https://gamebanana.com/mods/54268
+define bool MOD_ULTIMATE_MIGHTY_ACTIVE	= Mods.isModActive("Ultimate Mighty")
+// "Extra Slot Ray" by iCloudius, check https://gamebanana.com/mods/336038
+define bool MOD_EXTRA_RAY_ACTIVE	= Mods.isModActive("Extra Slot Ray")
+// "Ray the Flying Squirrel" by campbellsonic, https://gamebanana.com/mods/54261
+define bool MOD_CAMPBELL_RAY_ACTIVE	= Mods.isModActive("Ray the Flying Squirrel")
+// "Sonic 3D in 2D Ring Glow Effect" by GFX32, https://gamebanana.com/mods/360033
+define bool MOD_GFX32_RING_GLOW_ACTIVE	= Mods.isModActive("Sonic 3D in 2D Ring Glow Effect")
+// "Yellow Emerald" by Guthi, check https://gamebanana.com/mods/54326
+define bool MOD_YELLOW_EMERALD_ACTIVE	= Mods.isModActive("Yellow Emerald")
+// "3D Side View Chaos Emeralds" by Agnoristos, check https://gamebanana.com/mods/322550
+define bool MOD_3D_SIDE_EMERALDS_ACTIVE	= Mods.isModActive("3D Side View Chaos Emeralds")
