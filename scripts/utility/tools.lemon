@@ -1,45 +1,82 @@
+//? Get the transparency value for some spheres during collecting.
+function u8 SpheresModSupport.getOnCollectedAlpha(u8 sphereID)
+{
+	// 0x0a is blue sphere and 0x0c is DAGE green sphere during collecting
+	if (sphereID == 0x0a || sphereID == 0x0c)
+		return 0xa0
+	
+	// Return the base function
+	return base.SpheresModSupport.getOnCollectedAlpha(sphereID)
+}
+
+//? Returns the emerald sprite key.
+function string SpheresModSupport.getEmeraldSprite(u8 sphereID, u8 sphereSize16)
+{
+	// Use the stage number or algorithmic stage information to get the emerald color ID
+	u8 emeraldColorID = !(bluespheres.minigame_mode) ? global.next_bluespheres : (u8[0xffffffa4] & 0x07)
+	
+	// Determine whether sphereID is a chaos emerald or not
+	string emeraldType = (sphereID == 0x0b) ? "chaos" : "super"
+	
+#if GAMEAPP >= 0x21091200
+	// Replace Yellow Emerald with Orange, and Orange with Yellow, if the mod "Yellow Emerald" is active. Otherwise use the original position
+	u8 emeraldColor = emeraldColorID
+	
+	// "Yellow Emerald" by Guthi, check https://gamebanana.com/mods/54326
+	if (Mods.isModActive("Yellow Emerald"))
+	{
+		if (emeraldColorID == 0x01)
+			emeraldColor = 0x07
+		else if (emeraldColorID == 0x07)
+			emeraldColor = 0x01
+		emeraldColorID = emeraldColor
+	}
+	
+	// "3D Side View Chaos Emeralds" by Agnoristos, check https://gamebanana.com/mods/322550
+	if (Mods.isModActive("3D Side View Chaos Emeralds"))
+		emeraldType = "super"
+#endif 
+	
+	// Return sprite key
+	return stringformat("emerald_%s_0x%02x_size_%d", emeraldType, emeraldColorID, sphereSize16)
+}
+
 //? Returns the ring transformation. The closer the ring is to the camera, the more "flattened" it becomes.
 function u32 ManiaSpheres.get2DTransformRingCamera(u8 sphereSize16)
 {
-	u32 sphereTransform
-
 	if (sphereSize16 == 0x05)
-		sphereTransform = 4096
+		return 4096
 	else if (sphereSize16 == 0x04)
-		sphereTransform = 5376
+		return 5376
 	else if (sphereSize16 == 0x03)
-		sphereTransform = 8192
+		return 8192
 	else if (sphereSize16 == 0x02)
-		sphereTransform = 9472
+		return 9472
 	else if (sphereSize16 == 0x01)
-		sphereTransform = 13565
+		return 13565
 	else if (sphereSize16 == 0x00)
-		sphereTransform = 16534
-	
-	return sphereTransform
+		return 16534
+	else
+		return 0x00
 }
 
 //? Returns the Y-axis ring offset. The closer the ring is to the camera, the more it will be to the ground.
 function u32 ManiaSpheres.getRepositionRingY(u8 sphereSize32)
 {
-	u32 sphereReposition
-
 	if (sphereSize32 >= 0x20)
-		sphereReposition = 0x01
+		return 0x01
 	else if (sphereSize32 >= 0x0e)
-		sphereReposition = 0x02
+		return 0x02
 	else if (sphereSize32 >= 0x0c)
-		sphereReposition = 0x03
+		return 0x03
 	else if (sphereSize32 >= 0x0a)
-		sphereReposition = 0x04
+		return 0x04
 	else if (sphereSize32 >= 0x08)
-		sphereReposition = 0x05
+		return 0x05
 	else if (sphereSize32 >= 0x06)
-		sphereReposition = 0x06
+		return 0x06
 	else if (sphereSize32 >= 0x04)
-		sphereReposition = 0x07
+		return 0x07
 	else
-		sphereReposition = 0x08
-	
-	return sphereReposition
+		return 0x08
 }

@@ -1,31 +1,6 @@
-//? Draw a custom spheres.
-function void SpheresModSupport.renderCustomSpheres(u16 px, u16 py, u16 renderQueue, u8 alpha, u32 fog, u8 sphereID, u8 sphereSize32, u8 sphereSize16)
-{
-	// Use 32 frames for all types of spheres except emeralds and sparkles
-	u8 sphereSize
-	if ((sphereID >= 0x01 && sphereID <= 0x05) || sphereID == 0x0a || sphereID == 0x0c || sphereID == 0x0e)
-		sphereSize = sphereSize32
-	else
-		sphereSize = sphereSize16
-	
-	// Ring with 2D Transform
-	if (sphereID == 0x04 && Renderer.hasCustomSprite(stringformat("sphere_ring_%d", bluespheres.ring.framerate)))
-	{
-		string key = stringformat("sphere_ring_%d", bluespheres.ring.framerate)
-		u32 transform2D = (SpheresModSupport.get2DTransformSize16(sphereSize16) * 0x02) / 0x03
-		Renderer.drawCustomSpriteWithTransform(key, px, py + ManiaSpheres.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0xffffffff, transform2D + ManiaSpheres.get2DTransformRingCamera(sphereSize16), 0x00, 0x00, transform2D)
-	}
-	else
-	{
-		// Glow effect for rings sparkles
-		// "Sonic 3D in 2D Ring Glow Effect" by GFX32, https://gamebanana.com/mods/360033
-		if (Mods.isModActive("Sonic 3D in 2D Ring Glow Effect") && (sphereID >= 0x06 && sphereID <= 0x09) && Renderer.hasCustomSprite("3d2dring_glow"))
-			Renderer.drawCustomSprite("3d2dring_glow", px, py, 0x00, 0x00, renderQueue - 0x01, 0x00, 0x8f - ((bluespheres.ring.framerate - 0x04) * 0x1f))
-		
-		// Call the base function
-		base.SpheresModSupport.renderCustomSpheres(px, py, renderQueue, alpha, fog, sphereID, sphereSize32, sphereSize)
-	}
-}
+// - - - - - - - - - - - - - - - - - - - //
+// Ground render stuff			  //
+// - - - - - - - - - - - - - - - - - - - //
 
 //? Draw a custom ground.
 function void SpheresModSupport.renderCustomGround()
@@ -44,4 +19,52 @@ function void SpheresModSupport.renderCustomGround()
 		Renderer.drawCustomSprite(Game.getBlueSpheresGroundSprite(0x01), 0x00, 0x00, 0x00, 0x00, 0x3000)
 	}
 	Renderer.drawCustomSprite(Game.getBlueSpheresGroundSprite(0x00), 0x00, 0x00, 0x00, 0x10, 0x3000) // With flag to draw as fully opaque (rendering optimization)
+}
+
+// - - - - - - - - - - - - - - - - - - - //
+// Custom spheres stuff			//
+// - - - - - - - - - - - - - - - - - - - //
+
+//? Draw a custom spheres.
+function void SpheresModSupport.renderCustomSpheres(u16 px, u16 py, u16 renderQueue, u8 alpha, u32 fog, u8 sphereID, u8 sphereSize32, u8 sphereSize16)
+{
+	// Use 32 frames for all types of spheres except emeralds
+	u8 sphereSize
+	if ((sphereID >= 0x01 && sphereID <= 0x05) || sphereID == 0x0a)
+		sphereSize = sphereSize32
+	else
+		sphereSize = sphereSize16 
+	
+	// Ring with 2D Transform
+	if (sphereID == 0x04 && Renderer.hasCustomSprite(stringformat("sphere_ring_%d", bluespheres.ring.framerate)))
+	{
+		string key = stringformat("sphere_ring_%d", bluespheres.ring.framerate)
+		u32 transform2D = (SpheresModSupport.get2DTransformSize16(sphereSize16) * 0x02) / 0x03
+		Renderer.drawCustomSpriteWithTransform(key, px, py + ManiaSpheres.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0xffffffff, transform2D + ManiaSpheres.get2DTransformRingCamera(sphereSize16), 0x00, 0x00, transform2D)
+	}
+	// Ring sparkles with 2D Transform
+	else if ((sphereID >= 0x06 && sphereID <= 0x09) && Renderer.hasCustomSprite(stringformat("sphere_sparkle_%d", sphereID - 0x06)))
+	{
+		string key = stringformat("sphere_sparkle_%d", sphereID - 0x06)
+		u32 transform2D = SpheresModSupport.get2DTransformSize16(sphereSize16)
+		Renderer.drawCustomSpriteWithTransform(key, px, py + ManiaSpheres.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0xffffffff, transform2D, 0x00, 0x00, transform2D)
+		
+		// Glow effect for rings sparkles
+		// "Sonic 3D in 2D Ring Glow Effect" by GFX32, https://gamebanana.com/mods/360033
+		if (Mods.isModActive("Sonic 3D in 2D Ring Glow Effect") && Renderer.hasCustomSprite("3d2dring_glow"))
+		{
+			Renderer.drawCustomSpriteWithTransform("3d2dring_glow", px, py + ManiaSpheres.getRepositionRingY(sphereSize32), 0x00, 0x00, renderQueue, 0x80ffffff, transform2D, 0x00, 0x00, transform2D)
+		}
+	}
+	// DAGE Green sphere (0x0c when it's in a touch state)
+	else if ((sphereID == 0x0e || sphereID == 0x0c) && Renderer.hasCustomSprite(stringformat("sphere_green_size_%d", sphereSize32)))
+	{
+		string key = stringformat("sphere_green_size_%d", sphereSize32)
+		Renderer.drawCustomSprite(key, px, py, 0x00, 0x00, renderQueue, 0x00, alpha)
+	}
+	else
+	{
+		// Call the base function
+		base.SpheresModSupport.renderCustomSpheres(px, py, renderQueue, alpha, fog, sphereID, sphereSize32, sphereSize)
+	}
 }
