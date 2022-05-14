@@ -1,3 +1,22 @@
+//? Check the activity of mods and assign a value to globals.
+function void ManiaSpheres.modsCheck()
+{
+	// "Extra Slot Mighty" by iCloudius, check https://gamebanana.com/mods/336038
+	MOD_EXTRA_MIGHTY_ACTIVE = Mods.isModActive("Extra Slot Mighty")
+	// "Ultimate Mighty" by Sotaknuck, check https://gamebanana.com/mods/54268
+	MOD_ULTIMATE_MIGHTY_ACTIVE = Mods.isModActive("Ultimate Mighty")
+	// "Extra Slot Ray" by iCloudius, check https://gamebanana.com/mods/336038
+	MOD_EXTRA_RAY_ACTIVE = Mods.isModActive("Extra Slot Ray")
+	// "Ray the Flying Squirrel" by campbellsonic, https://gamebanana.com/mods/54261
+	MOD_CAMPBELL_RAY_ACTIVE = Mods.isModActive("Ray the Flying Squirrel")
+	// "Sonic 3D in 2D Ring Glow Effect" by GFX32, https://gamebanana.com/mods/360033
+	MOD_GFX32_RING_GLOW_ACTIVE = Mods.isModActive("Sonic 3D in 2D Ring Glow Effect")
+	// "Yellow Emerald" by Guthi, check https://gamebanana.com/mods/54326
+	MOD_YELLOW_EMERALD_ACTIVE = Mods.isModActive("Yellow Emerald")
+	// "3D Side View Chaos Emeralds" by Agnoristos, check https://gamebanana.com/mods/322550
+	MOD_3D_SIDE_EMERALDS_ACTIVE = Mods.isModActive("3D Side View Chaos Emeralds")
+}
+
 //? Get the transparency value for some spheres during collecting.
 function u8 SpheresModSupport.getOnCollectedAlpha(u8 sphereID)
 {

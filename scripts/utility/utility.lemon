@@ -1,3 +1,13 @@
+//@ Function taken from sonic3air_dev/scripts/standalone/enginecallbacks.lemon
+function void Init()
+{
+	// Check the activity of mods and assign a value to globals
+	ManiaSpheres.modsCheck()
+	
+	// Call the base function
+	base.Init()
+}
+
 //@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
 //# address-hook(0x009b62) end(0x009d1c)
 function void fn009b62()
