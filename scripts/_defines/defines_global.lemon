@@ -1,0 +1,2 @@
+global u8 bluespheres.ring.timer		// Ring timerate
+global u8 bluespheres.ring.framerate	// Ring framerate animation

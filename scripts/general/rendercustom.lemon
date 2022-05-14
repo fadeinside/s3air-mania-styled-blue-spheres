@@ -5,7 +5,7 @@
 //? Draw a custom ground.
 function void SpheresModSupport.renderCustomGround()
 {
-	if !(SETTING_BS_SHARPGROUND && !(Game.getSetting(SETTING_BS_VISUAL_STYLE) & 0x02))
+	if !(SETTING_BS_SHARP_GROUND && !(Game.getSetting(SETTING_BS_VISUAL_STYLE) & 0x02))
 	{
 		// Call the base function
 		base.SpheresModSupport.renderCustomGround()
@@ -14,10 +14,9 @@ function void SpheresModSupport.renderCustomGround()
 	
 	u32 fieldColorBaseAddress = u32[0xffffe446]
 	Game.renderBlueSpheresGround(bluespheres.position.x, bluespheres.position.y, bluespheres.direction, u16[fieldColorBaseAddress], u16[fieldColorBaseAddress+0x08])
+	
 	for (u8 A = 0x00; A < 0x40; ++A)
-	{
 		Renderer.drawCustomSprite(Game.getBlueSpheresGroundSprite(0x01), 0x00, 0x00, 0x00, 0x00, 0x3000)
-	}
 	Renderer.drawCustomSprite(Game.getBlueSpheresGroundSprite(0x00), 0x00, 0x00, 0x00, 0x10, 0x3000) // With flag to draw as fully opaque (rendering optimization)
 }
 

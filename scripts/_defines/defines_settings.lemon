@@ -1,2 +1,3 @@
 // Options
-global u8 SETTING_BS_SHARPGROUND	// Set 0x01 to use the sharped appearance of the ground edges
+global u8 SETTING_BS_SHARP_GROUND	// Set 0x01 to use the sharped appearance of the ground edges
+global u8 SETTING_BS_PICKING_UP_MANIA	//

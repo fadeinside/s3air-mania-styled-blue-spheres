@@ -1,6 +1,3 @@
-global u8 bluespheres.ring.timer		// Ring timerate
-global u8 bluespheres.ring.framerate	// Ring framerate animation
-
 //@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
 //# address-hook(0x009b62) end(0x009d1c)
 function void fn009b62()
@@ -23,6 +20,13 @@ function void fn009b62()
 //# address-hook(0x00972e) end(0x0098ae)
 function void fn00972e()
 {
+	if !(SETTING_BS_PICKING_UP_MANIA)
+	{
+		// Call the base function
+		base.fn00972e()
+		return
+	}
+	
 	// Determine which sphere is in front of us
 	A1 = 0xfffff100
 	D0.u16 = ((bluespheres.position.x + 0x80) >> 0x08) & 0x1f
