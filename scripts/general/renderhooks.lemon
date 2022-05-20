@@ -9,7 +9,8 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 	{
 		u8 character = (objA0.update_address == 0x00927a) ? getSecondCharacter() : getMainCharacter()
 		
-		if ((u8[0xffffe654] == 0x01 && MOD_EXTRA_MIGHTY_ACTIVE) || (character == CHARACTER_SONIC && MOD_ULTIMATE_MIGHTY_ACTIVE))
+		// CHARACTER_KNUCKLES used via Level select for extra space to show his name on results screen.
+		if (((character == CHARACTER_SONIC || character == CHARACTER_KNUCKLES) && u8[0xffffe654] == 0x01 && MOD_EXTRA_MIGHTY_ACTIVE) || (character == CHARACTER_SONIC && MOD_ULTIMATE_MIGHTY_ACTIVE))
 		{
 			if (char.state == char.state.STANDING)
 				key = stringformat("character_mighty_idle_%d", char.animation_bs.sprite)
@@ -18,7 +19,7 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 			else if (char.state == char.state.ROLLING)
 				key = stringformat("character_mighty_jump_%d", char.animation_bs.sprite)
 		}
-		else if ((u8[0xffffe654] == 0x02 && MOD_EXTRA_RAY_ACTIVE) || (character == CHARACTER_TAILS && MOD_CAMPBELL_RAY_ACTIVE))
+		else if ((character == CHARACTER_TAILS && u8[0xffffe654] == 0x02 && MOD_EXTRA_RAY_ACTIVE) || (character == CHARACTER_TAILS && MOD_CAMPBELL_RAY_ACTIVE))
 		{
 			if (char.state == char.state.STANDING)
 				key = stringformat("character_ray_idle_%d", char.animation_bs.sprite)
