@@ -4,6 +4,8 @@
 
 Stylizes special stages and Blue Sphere game, under the style of Sonic Mania. Replacing characters, spheres, HUD, and more with Sonic Mania. Don't forget to enable Classic style in the game options for a better look.
 
+<font color="#fe4e4e">Need <a href="https://gamebanana.com/mods/380386">Blue Spheres Sprites Mod Support</a> mod to work.</font>
+
 ## <font color="#6ee16c">List of features:</font>
 
 * Full-smooth animations for characters with Sonic Mania sprites.
